@@ -14,9 +14,9 @@
         "ext-json": "*",
         "ext-curl": "*"
     },
-    "autoload": {
-        "psr-4": {
-            "JSONRPC2\\": "src/JSONRPC2/"
-        }
-    }
+	"autoload": {
+		"psr-4": {
+			"JSONRPC2\\": "src/JSONRPC2/"
+		}
+	}
 }

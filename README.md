@@ -20,7 +20,7 @@ A simple JSON-RPC 2.0 implementation
 ```php
 $obj = new \JSONRPC2\RemoteProxyObject(
 	new \JSONRPC2\Transports\HTTP(
-		'http://127.0.0.1:8001/some/endpoint'
+		'https://example.com/some/endpoint'
 	)
 );
 
