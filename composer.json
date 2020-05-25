@@ -1,0 +1,22 @@
+{
+    "name": "inferno-code/jsonrpc2-php",
+    "type": "library",
+    "description": "A simple JSON-RPC 2.0 implementation.",
+    "keywords": [ "json", "rpc", "jsonrpc" ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "inferno-code"
+        }
+	],
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "JSONRPC2\\": "src/JSONRPC2/"
+        }
+    }
+}

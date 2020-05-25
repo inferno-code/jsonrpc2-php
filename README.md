@@ -19,9 +19,9 @@ A simple JSON-RPC 2.0 implementation
 
 ```php
 $obj = new \JSONRPC2\RemoteProxyObject(
-    new \JSONRPC2\Transports\HTTP(
-        'http://127.0.0.1:8001/some/endpoint'
-    )
+	new \JSONRPC2\Transports\HTTP(
+		'http://127.0.0.1:8001/some/endpoint'
+	)
 );
 
 printf("result = %s\n", $obj->substract(50, 23));
@@ -33,15 +33,15 @@ printf("result = %s\n", $obj->substract(50, 23));
 $server = new \JSONRPC2\ServerObject();
 
 $server->on(
-    'substract',
-    [ 'minuend', 'subtrahend' ],
-    function ($minuend, $subtrahend) {
-        return $minuend - $subtrahend;
-    }
+	'substract',
+	[ 'minuend', 'subtrahend' ],
+	function ($minuend, $subtrahend) {
+		return $minuend - $subtrahend;
+	}
 );
 
 $headers = [
-    'Content-Type: application/json; charset=utf-8',
+	'Content-Type: application/json; charset=utf-8',
 	'Access-Control-Allow-Origin: *',
 	'Access-Control-Allow-Methods: POST, GET, DELETE, PUT, PATCH, OPTIONS',
 	'Access-Control-Allow-Headers: Authorization, Origin, Content-Type, Accept',
@@ -49,7 +49,7 @@ $headers = [
 ];
 
 foreach ($headers as $header)
-    header($header);
+	header($header);
 
 $encodedRequest = file_get_contents('php://input');
 $encodedResponse = $server->reply($encodedRequest);
