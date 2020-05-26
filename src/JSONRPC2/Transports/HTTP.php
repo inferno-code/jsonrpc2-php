@@ -62,7 +62,7 @@ class HTTP extends AbstractTransport {
 		return $result;
 	}
 
-	protected function getResponse(string $request): string {
+	protected function getResponse(string $stringRequest): string {
 
 		$ch = curl_init($this->endpoint);
 		curl_setopt_array(
@@ -71,7 +71,7 @@ class HTTP extends AbstractTransport {
 				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_HTTPHEADER => $this->getHeaders(),
 				CURLOPT_POST => true,
-				CURLOPT_POSTFIELDS => $request
+				CURLOPT_POSTFIELDS => $stringRequest
 			]
 		);
 

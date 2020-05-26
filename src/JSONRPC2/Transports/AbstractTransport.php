@@ -82,9 +82,31 @@ abstract class AbstractTransport {
 		return new Response($response->result, $response->id ?? null);
 	}
 
+	private function isResponseIsRequired($request) {
+
+		$required = false;
+
+		if (is_array($request)) {
+			foreach ($request as $request_) {
+				if ($request_->isCall()) {
+					$required = true;
+					break;
+				}
+			}
+		} else if ($request->isCall()) {
+			$required = true;
+		}
+
+		return $required;
+	}
+
 	private function verifyMatching($request, $response) {
 
 		if (is_array($request)) {
+
+			if ($response === null) {
+				$response = [ ];
+			}
 
 			if (!is_array($response)) {
 				throw new RuntimeException('Unexpected response. Array expected, but single response was received.');
@@ -122,11 +144,11 @@ abstract class AbstractTransport {
 
 		} else {
 
-			if (is_array($response)) {
-				throw new RuntimeException('Unexpected response. Single response expected, but array of responses was received.');
-			}
+			if ($request->isCall()) {
 
-			if (isset($request->id) && $request->id !== null) {
+				if (is_array($response)) {
+					throw new RuntimeException('Unexpected response. Single response expected, but array of responses was received.');
+				}
 
 				if ($response === null) {
 					throw new RuntimeException('Response expected. Request represents a call, not notification.');
@@ -141,12 +163,11 @@ abstract class AbstractTransport {
 
 	public function reply($request) {
 
-		$jsonRequest = $this->encodeRequest($request);
-		$jsonResponse = $this->getResponse($jsonRequest);
-		if (is_array($request) || $request->isCall()) {
-			$response = $this->decodeResponse($jsonResponse);
-		} else {
-			$response = null;
+		$stringRequest = $this->encodeRequest($request);
+		$stringResponse = $this->getResponse($stringRequest);
+		$response = null;
+		if ($this->isResponseIsRequired($request)) {
+			$response = $this->decodeResponse($stringResponse);
 		}
 
 		$this->verifyMatching($request, $response);
@@ -154,6 +175,6 @@ abstract class AbstractTransport {
 		return $response;
 	}
 
-	abstract protected function getResponse(string $request): string;
+	abstract protected function getResponse(string $stringRequest): string;
 
 }

@@ -19,12 +19,12 @@ class Request {
 
 	public function isCall(): bool {
 
-		return isset($this->id);
+		return isset($this->id) && $this->id !== null;
 	}
 
 	public function isNotification(): bool {
 
-		return !isset($this->id);
+		return !$this->isCall();
 	}
 
 	public static function getNextID() {
