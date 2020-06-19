@@ -71,7 +71,7 @@ abstract class AbstractTransport {
 					$response->error->message,
 					$response->error->data
 				),
-				$response['id'] ?? null
+				$response->id ?? null
 			);
 		}
 

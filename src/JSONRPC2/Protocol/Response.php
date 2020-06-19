@@ -41,7 +41,7 @@ class Response {
 
 	public function getError(): ?GenericError {
 
-		if ($this->isError()) {
+		if ($this->hasError()) {
 
 			return new GenericError(
 				$this->error->code,
