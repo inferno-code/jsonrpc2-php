@@ -59,7 +59,7 @@ abstract class AbstractTransport {
 
 		if (isset($response->error)) {
 
-			if (!is_object(isset($response->error))
+			if (!is_object($response->error)
 			|| !isset($response->error->code) || !is_int($response->error->code)
 			|| !isset($response->error->message) || !is_string($response->error->message)) {
 				throw new InvalidArgumentException('Invalid response. Invalid format of error desriptor.');
