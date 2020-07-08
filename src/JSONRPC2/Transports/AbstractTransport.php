@@ -16,6 +16,7 @@ use function \is_numeric;
 use function \is_string;
 use function \is_int;
 use function \array_map;
+use function \property_exists;
 
 abstract class AbstractTransport {
 
@@ -53,7 +54,7 @@ abstract class AbstractTransport {
 			}
 		}
 
-		if (!isset($response->error) && !isset($response->result)) {
+		if (!property_exists($response, 'error') && !property_exists($response, 'result')) {
 			throw new InvalidArgumentException('Invalid response. Controversial properties.');
 		}
 
@@ -75,7 +76,7 @@ abstract class AbstractTransport {
 			);
 		}
 
-		if (!isset($response->result)) {
+		if (!property_exists($response, 'result')) {
 			throw new InvalidArgumentException('Invalid response. Result expected.');
 		}
 
