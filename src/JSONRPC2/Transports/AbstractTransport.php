@@ -70,7 +70,7 @@ abstract class AbstractTransport {
 				new GenericError(
 					$response->error->code,
 					$response->error->message,
-					$response->error->data
+					$response->error->data ?? null
 				),
 				$response->id ?? null
 			);
