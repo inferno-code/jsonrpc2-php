@@ -81,6 +81,14 @@ class HTTP extends AbstractTransport {
 				'Server is unavailable: %s',
 				curl_error($ch)
 			));
+		} else {
+			$status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+			if ($status != 200) {
+				throw new RuntimeException(sprintf(
+					'Server returns is unexpected status code: %d',
+					$status
+				));
+			}
 		}
 
 		return $response;

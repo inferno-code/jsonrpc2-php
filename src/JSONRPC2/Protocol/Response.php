@@ -46,7 +46,7 @@ class Response {
 			return new GenericError(
 				$this->error->code,
 				$this->error->message,
-				$this->error->data ?? null,
+				$this->error->data ?? null
 			);
 		}
 		

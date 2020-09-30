@@ -19,8 +19,18 @@ A simple JSON-RPC 2.0 implementation
 
 ```php
 $obj = new \JSONRPC2\RemoteProxyObject(
+
 	new \JSONRPC2\Transports\HTTP(
-		'https://example.com/some/endpoint'
+
+		// URL of endpoint
+		'https://example.com/some/endpoint',
+
+		// options
+		(object) [
+			'headers' => [
+				'Authorization' => 'Bearer ...'
+			]
+		]
 	)
 );
 
