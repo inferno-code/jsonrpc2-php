@@ -3,6 +3,7 @@
 namespace JSONRPC2;
 
 use \JSONRPC2\Protocol\Client;
+use \JSONRPC2\Protocol\Batch;
 use \JSONRPC2\Transports\AbstractTransport;
 use \JSONRPC2\CallableBatch;
 
@@ -41,7 +42,7 @@ class RemoteObject extends Client {
 		return $this->transport->reply($request);
 	}
 
-	public function batch(): CallableBatch {
+	public function batch(): Batch {
 
 		return new CallableBatch($this);
 	}
